@@ -1,5 +1,5 @@
 const userModel = require("../models/user.model");
-const User = require("../models/user.model");
+
 exports.getUser=async (req,res)=>{
   
     try{
@@ -14,6 +14,38 @@ exports.getUser=async (req,res)=>{
         res.status(500).json({
             message:'server error'
         })
+    }
+}
+
+exports.getActiveUser=async(req,res)=>{
+    try{
+        const user= new userModel()
+const result = await user.findAge()
+res.json(result)
+    }
+    catch(err){
+        res.status(500).json({err})
+    }
+}
+
+exports.getWord=async(req,res)=>{
+    try{
+        const result = await userModel.findWord()
+        res.status(200).json({result})
+    }
+    catch(err){
+        res.status(500).json({err})
+    }
+}
+
+exports.getText= async(req,res)=>{
+    try{
+const result = await userModel.find().findText('diduif')
+res.status(200).json({result})
+
+    }
+    catch(err){
+        res.status(500).json({err})
     }
 }
 
